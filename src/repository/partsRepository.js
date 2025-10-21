@@ -13,3 +13,17 @@ export async function insertPart(name, dscr){
         throw e;
     }
 }
+
+export async function selectByNamePart(name){
+    let db;
+    try{
+        db = await connection();
+        const sql = "SELECT * FROM parts WHERE name_parts = ?;";
+        const values = [name]
+        const result = await db.run(sql,values)
+        return result
+    }catch(e){
+        console.error('Error get parts to database:', e.message);
+        throw e;
+    }
+}
