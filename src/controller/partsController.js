@@ -39,8 +39,7 @@ export async function getByNameParts(req, res) {
         newParts = await listByNameParts(name_parts);
         res.status(201).json({
             status:"Parts get on data base",
-            id_peca: newParts.lastID,
-            changes: newParts.changes
+            newParts
         })
     }catch(e){
         let statusCode = 500;
