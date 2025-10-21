@@ -142,5 +142,5 @@ vite.config.ts.timestamp-*
 .vite/
 
 # Data Base 
-./*.db
+*.db
 
