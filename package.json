@@ -1,0 +1,18 @@
+{
+  "name": "api_pecas",
+  "version": "1.0.0",
+  "description": "Proposta de Projeto: API RESTful de Gerenciamento de Peças de Veículos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.1.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  }
+}

@@ -1,0 +1,23 @@
+Proposta de Projeto: API RESTful de Gerenciamento de Peças de Veículos
+
+1. Objetivo Principal
+
+Desenvolver uma API RESTful utilizando Node.js para consolidar e demonstrar proficiência em conceitos de Server-Side Development, arquitetura modular e manipulação assíncrona de dados.
+
+2. Especificação do Recurso
+
+A API deve gerenciar o recurso principal Peças de Veículos (Endpoint principal: /pecas), que deve ser persistido em um banco de dados SQLite.
+Estrutura de Dados da Peça: id_peca, nome_peca, descr_peca
+
+3. Endpoints da API (CRUD)
+
+A API deve implementar todos os métodos HTTP (CRUD) para a manipulação do recurso pecas: POST, GET, PUT, DELETE.
+
+4. Requisitos Técnicos Obrigatórios
+
+O projeto será avaliado com base na correta aplicação dos seguintes conceitos em Node.js:
+1.Organização Modular de Diretórios: Implementar a separação de responsabilidades (por exemplo, src/routes, src/controller, src/config).
+2.Modularização: Utilizar módulos para a lógica de acesso ao banco de dados (ex: src/repository ou src/service) e a lógica de negócio (controllers).
+3.Assincronismo: Todas as operações de banco de dados (sqlite3.run, sqlite3.all, etc.) devem ser manipuladas utilizando Promises (async/await) para evitar callback hell e garantir que a API não bloqueie.
+4.Tratamento de Exceções: Implementar blocos try...catch robustos nos Controllers ou Services para capturar erros de banco de dados, validação ou lógica, retornando códigos de status HTTP apropriados (400 Bad Request, 404 Not Found, 500 Internal Server Error).
+5.Validação de Entrada: Implementar validação básica de dados nos requests POST e PUT (ex: verificar se nome_peca está presente).
