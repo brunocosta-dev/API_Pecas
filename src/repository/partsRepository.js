@@ -27,3 +27,32 @@ export async function selectByNamePart(name){
         throw e;
     }
 }
+
+
+export async function sqlUpdatePart(newName, name){
+    let db;
+    try{
+        db = await connection();
+        const sql = "UPDATE parts SET name_parts = ? WHERE name_parts = ?;";
+        const values = [newName, name]
+        const result = await db.get(sql,values)
+        return result
+    }catch(e){
+        console.error('Error update parts to database:', e.message);
+        throw e;
+    }
+}
+
+export async function sqlDeletePart(name){
+    let db;
+    try{
+        db = await connection();
+        const sql = "DELETE FROM parts WHERE name_parts = ?;";
+        const values = [name]
+        const result = await db.get(sql,values)
+        return result
+    }catch(e){
+        console.error('Error delete parts to database:', e.message);
+        throw e;
+    }
+}
