@@ -68,7 +68,9 @@ export async function putParts(req, res) {
     try{
         newParts = await updateParts(new_name, name_parts);
         res.status(201).json({
-            
+            status:"Parts saved on data base",
+            id_peca: newParts.lastID,
+            changes: newParts.changes
         })
     }catch(e){
         let statusCode = 500;

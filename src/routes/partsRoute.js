@@ -3,10 +3,10 @@ import { postParts, getByNameParts, putParts, deleteParts } from '../controller/
 
 let router = express.Router();
 
-router.post("/parts",postParts);
+router.post("/add",postParts);
 // router.get("/parts",getAllParts);
-router.get("/parts",getByNameParts);
-router.put("/parts",putParts);
-router.delete("/parts",deleteParts);
+router.get("/search-part",getByNameParts);
+router.put("/update-part",putParts);
+router.delete("/delete-part",deleteParts);
 
 export {router};
