@@ -1,4 +1,4 @@
-import { saveParts, listByNameParts, updateParts, delParts } from "../service/partsService.js";
+import { saveParts, listByNameParts, updateParts, delParts, listAllParts } from "../service/partsService.js";
 
 export async function postParts(req, res) {
     const {name_parts, dscr_parts} = req.body;
@@ -31,16 +31,23 @@ export async function postParts(req, res) {
     }
 }
 
-export async function getByNameParts(req, res) {
-    const {name_parts} = req.body;
-    let newParts;
-    
+export async function getParts(req, res) {
+    const name = req.query.name;
+    let part;
     try{
-        newParts = await listByNameParts(name_parts);
-        res.status(201).json({
-            status:"Parts get on data base",
-            newParts
-        })
+        if(!name || name.trim() === ''){
+            part = await listAllParts();
+            res.status(201).json({
+                status:"Parts get on data base",
+                part
+            })           
+        }else{
+            part = await listByNameParts(name);
+            res.status(201).json({
+                status:"Parts get on data base",
+                part
+            })
+        }
     }catch(e){
         let statusCode = 500;
         let errorMessage = "Unable to get the parts. Please try again."

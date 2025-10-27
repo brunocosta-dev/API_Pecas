@@ -1,4 +1,4 @@
-import { insertPart, selectByNamePart, sqlUpdatePart, sqlDeletePart } from "../repository/partsRepository.js"
+import { insertPart, selectByNamePart, sqlUpdatePart, sqlDeletePart, selectAllPart } from "../repository/partsRepository.js"
 
 export async function saveParts(name, dscr) {
     if(typeof name != 'string' || typeof dscr != 'string' || !name.trim() || !dscr.trim()){
@@ -14,11 +14,18 @@ export async function saveParts(name, dscr) {
 }
 
 export async function listByNameParts(name) {
-    if(typeof name != 'string' || !name.trim()){
-        throw new Error('Invalid input type. Name must be text.');
-    }
     try{
         let part = await selectByNamePart(name);
+        return part;
+    }catch(e){
+        console.error('Error get parts', e.message);
+        throw e;
+    }
+}
+
+export async function listAllParts() {
+    try{
+        let part = await selectAllPart();
         return part;
     }catch(e){
         console.error('Error get parts', e.message);
