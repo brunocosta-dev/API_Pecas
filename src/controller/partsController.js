@@ -117,7 +117,10 @@ export async function deleteParts(req, res) {
     let part;
     try{
         part = await delParts(id);
-        return res.status(204).send();
+        res.status(200).json({
+            status:"Parts deleted"
+        });
+        //return res.status(204).send();
     }catch(e){
         let statusCode = 500;
         let errorMessage = "Unable to delete the parts. Please try again."
