@@ -69,19 +69,24 @@ export async function getParts(req, res) {
 }
 
 export async function putParts(req, res) {
-    const {new_name, name_parts} = req.body;
-    let newParts;
+    const id = req.params.id;
+    const {name_parts, dscr_parts} = req.body;
     
     try{
-        newParts = await updateParts(new_name, name_parts);
-        res.status(201).json({
-            status:"Parts saved on data base",
-            id_peca: newParts.lastID,
-            changes: newParts.changes
+        const modifyPart = await updateParts(id, name_parts, dscr_parts);
+        res.status(200).json({
+            status:"Parts modify",
+            id_peca: modifyPart.lastID,
+            changes: modifyPart.changes
         })
     }catch(e){
         let statusCode = 500;
         let errorMessage = "Unable to save the parts. Please try again."
+
+        if (e.message && e.message.includes('não encontrada')) { 
+            statusCode = 404;
+            errorMessage = e.message; // Usa a mensagem de erro do Repository
+        }
         
         if (e.message && e.message.includes('cannot be empty or invalid')){
             statusCode = 400;
@@ -100,17 +105,19 @@ export async function putParts(req, res) {
 }
 
 export async function deleteParts(req, res) {
-    const {name_parts} = req.body;
-    let newParts;
-    
+    const id = req.params.id;
+    let parts;
     try{
-        newParts = await delParts(name_parts);
-        res.status(201).json({
-            
-        })
+        parts = await delParts(id);
+        return res.status(204).send();
     }catch(e){
         let statusCode = 500;
         let errorMessage = "Unable to delete the parts. Please try again."
+
+        if (e.message && e.message.includes('Parts not found with ID:')){
+            statusCode = 404;
+            errorMessage = e.message;
+        }
         
         if (e.message && e.message.includes('cannot be empty or invalid')){
             statusCode = 400;

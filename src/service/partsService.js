@@ -33,12 +33,12 @@ export async function listAllParts() {
     }
 }
 
-export async function updateParts(newName, name) {
-    if(typeof newName != 'string' || name != 'string' || !newName.trim() || !name.trim()){
-        throw new Error('Invalid input type. NewData and name must be text.');
+export async function updateParts(id, name_parts, dscr_parts) {
+    if(typeof name_parts != 'string' || typeof dscr_parts != 'string' || !name_parts.trim() || !dscr_parts.trim()){
+        throw new Error('Invalid input type. Name and description must be non-empty text.');
     }
     try{
-        let part = await sqlUpdatePart(newName, name);
+        let part = await sqlUpdatePart(id, name_parts, dscr_parts);
         return part;
     }catch(e){
         console.error('Error update parts', e.message);
@@ -46,12 +46,9 @@ export async function updateParts(newName, name) {
     }
 }
 
-export async function delParts(name) {
-    if(typeof name != 'string' || !name.trim()){
-        throw new Error('Invalid input type. Name must be text.');
-    }
+export async function delParts(id) {
     try{
-        let part = await sqlDeletePart(name,);
+        let part = await sqlDeletePart(id);
         return part;
     }catch(e){
         console.error('Error delete parts', e.message);

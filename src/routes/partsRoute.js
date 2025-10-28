@@ -5,7 +5,7 @@ let router = express.Router();
 
 router.post("/add",postParts);
 router.get("/search-part",getParts);
-router.put("/update-part",putParts);
-router.delete("/delete-part",deleteParts);
+router.put("/update-part/:id",putParts);
+router.delete("/delete-part/:id",deleteParts);
 
 export {router};
