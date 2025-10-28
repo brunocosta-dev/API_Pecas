@@ -37,16 +37,24 @@ export async function getParts(req, res) {
     try{
         if(!name || name.trim() === ''){
             part = await listAllParts();
-            res.status(201).json({
+            res.send({
                 status:"Parts get on data base",
                 part
             })           
         }else{
             part = await listByNameParts(name);
-            res.status(201).json({
+            if(part == null || undefined){
+                res.send({
+                    status:`Part not found with name ${name}`,
+                    data: []
+                })  
+            }else{
+                res.send({
                 status:"Parts get on data base",
                 part
             })
+            }
+
         }
     }catch(e){
         let statusCode = 500;
