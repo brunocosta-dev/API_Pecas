@@ -114,9 +114,9 @@ export async function putParts(req, res) {
 
 export async function deleteParts(req, res) {
     const id = req.params.id;
-    let parts;
+    let part;
     try{
-        parts = await delParts(id);
+        part = await delParts(id);
         return res.status(204).send();
     }catch(e){
         let statusCode = 500;
