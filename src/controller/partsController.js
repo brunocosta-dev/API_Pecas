@@ -43,16 +43,16 @@ export async function getParts(req, res) {
             })           
         }else{
             part = await listByNameParts(name);
-            if(part == null || undefined){
+            if(!part || part.length === 0){
                 res.send({
                     status:`Part not found with name ${name}`,
                     data: []
                 })  
             }else{
                 res.send({
-                status:"Parts get on data base",
-                part
-            })
+                    status:"Parts get on data base",
+                    part
+                })
             }
 
         }
